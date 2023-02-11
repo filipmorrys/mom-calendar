@@ -1,0 +1,23 @@
+<section class="calendar">
+    <section class="temporal-edge">
+        <div class="hour">
+            Hora
+        </div>
+        <div *ngFor="let hour of hourLabels" class="hour">
+            {{hour}}
+        </div>
+    </section>
+    <section *ngFor="let dayOfWeek of weeklyCalendar.days" class="day-of-week">
+        <div class="day-header">
+            {{dayOfWeek.name}}
+        </div>
+        <div *ngFor="let person of dayOfWeek.hours; let i = index" class="container">
+            <div *ngIf="person.name != ''" [ngClass]="selectClass(dayOfWeek, i)" [ngStyle]="{'background-color': person.color}">
+                <ng-container *ngIf="isAssignationStart(dayOfWeek, i)">{{ person.name }}</ng-container>
+            </div>
+            <div *ngIf="person.name == ''" class="empty-cell">
+                <i class="fa-solid fa-plus" id="add-assignation-button"></i>
+            </div>
+        </div>
+    </section>
+</section>

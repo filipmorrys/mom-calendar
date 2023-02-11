@@ -1,0 +1,95 @@
+.calendar {
+    display: flex;
+}
+
+.day-of-week {
+    flex-grow: 1;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.day-header {
+    height: 50px;
+    line-height: 50px;
+    background-color: lightgray;
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+
+.hour {
+    height: 50px;
+    line-height: 50px;
+    background-color: lightgray;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.container {
+    height: 51px;
+    background-color: aliceblue;
+    text-align: center;
+    /*border-bottom: 1px solid darkgray;*/
+    min-width: 100px;
+    padding: 0px;
+
+}
+
+.assignation-start {
+    height: 40px;
+    text-align: center;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-bottom: 0px;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+    min-width: 100px;
+    padding: 10px 0px 0px 0px;
+    font-weight: bold;
+    font-size: 1.2em;
+
+}
+
+.assignation {
+    height: 50px;
+    text-align: center;
+    margin-left: 2px;
+    margin-right: 2px;
+    min-width: 100px;
+}
+
+.assignation-end {
+    height: 50px;
+    text-align: center;
+    margin-left: 2px;
+    margin-right: 2px;
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    min-width: 100px;
+}
+
+.empty-cell {
+    position: relative;
+    height: 100%;
+    opacity: 0;
+}
+
+.empty-cell:hover {
+    opacity: 1;
+}
+
+#add-assignation-button {
+    font-size: 1.5em;
+    position: absolute;
+    right: 20px;
+    top: 5px;
+    color: lightblue;
+    font-weight: bolder;
+}
+
+#add-assignation-button:hover {
+    color: blue;
+}
