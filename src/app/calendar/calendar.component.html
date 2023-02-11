@@ -27,8 +27,10 @@
                 <ng-container *ngIf="isAssignationStart(dayOfWeek, i)">{{ person.name }}</ng-container>
             </div>
             <div *ngIf="person.name == ''" class="empty-cell">
-                <i class="fa-solid fa-plus" id="add-assignation-button"></i>
+                <i class="fa-solid fa-plus" id="add-assignation-button" (click)="assignationDialog(dayOfWeek, i)"></i>
             </div>
         </div>
     </section>
 </section>
+
+<app-dialog [init]="initIndex" [end]="endIndex" [day]="dayIndex" (onAssignation)="assign($event)" #dialog></app-dialog>

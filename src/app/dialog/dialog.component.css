@@ -1,0 +1,60 @@
+.dialog {
+    border: 1px solid black;
+    width: 450px;
+    height: 220px;
+    padding-left: 10px;
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    background-color: azure;
+    visibility: hidden;
+}
+
+.dialog-header {
+    display: flex;
+    height: 40px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dialog-header-text {
+    font-weight: bold;
+}
+
+.dialog-header-close {
+    padding-right: 10px;
+    font-weight: bold;
+}
+
+.dialog-form {
+    display: flex;
+    flex-wrap: wrap;
+    height: 120px;
+    align-content: space-around;
+}
+
+.field {
+    width: 200px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10px;
+
+}
+
+.field select {
+    height: 30px;
+    width: 100px;
+}
+
+.dialog-actions {
+    height: 40px;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 40px;
+}
+
+.dialog-actions button {
+    height: 36px;
+    margin-left: 10px;
+}

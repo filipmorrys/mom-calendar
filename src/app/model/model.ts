@@ -14,12 +14,14 @@ export class WeeklyCalendar {
 }
 
 export class Day {
+    index: number;
     date: Date;
     hours: Person[];
 
     constructor(date: Date, hours: Person[]) {
         this.date = date;
         this.hours = hours;
+        this.index = this.date.getDay();
     }
 
     dayOfMonth() {
@@ -88,5 +90,20 @@ export class Person {
     constructor(name: string, color: string) {
         this.name = name;
         this.color = color;
+    }
+}
+
+
+export class Assignation {
+    init: number;
+    end: number;
+    day: number;
+    person: Person;
+
+    constructor(init: number, end:number, day:number, person: Person) {
+        this.init = init;
+        this.end = end;
+        this.day = day;
+        this.person = person;
     }
 }

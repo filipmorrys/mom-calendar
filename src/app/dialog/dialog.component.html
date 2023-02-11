@@ -1,0 +1,33 @@
+<form #assignationForm="ngForm">
+    <div class="dialog" [ngStyle]="{'visibility': visibility}">
+        <div class="dialog-header">
+            <div class="dialog-header-text">Añadir asignación</div>
+            <div class="dialog-header-close"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <div class="dialog-form">
+            <div class="field">
+                <label for="fromHour">Desde:</label>
+                <select name="fromHour" [(ngModel)]="assignation.init">
+                    <option *ngFor="let hour of hours" [value]="hour.index">{{hour.label}}</option>
+                </select>
+            </div>
+            <div class="field">
+                <label for="toHour">Hasta:</label>
+                <select name="toHour" [(ngModel)]="assignation.end">
+                    <option *ngFor="let hour of hours" [value]="hour.index">{{hour.label}}</option>
+                </select>
+            </div>
+            <div class="field">
+                <label for="person">Persona:</label>
+                <select name="person" [(ngModel)]="assignation.person">
+                    <option *ngFor="let person of persons" [ngValue]="person">{{person.name}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="dialog-actions">
+            <button (click)="hide()">Cerrar</button>
+            <button (click)="assignPerson(assignationForm)">Asignar</button>
+        </div>
+    </div>
+</form>

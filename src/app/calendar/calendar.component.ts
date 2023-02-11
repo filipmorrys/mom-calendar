@@ -1,12 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Day, Person, WeeklyCalendar } from '../model/model'
-
-const EMPTY: Person = new Person("", "#FFFFFF");
-const VIO: Person = new Person("Vio", "#B9C2D3");
-const PEDRO: Person = new Person("Pedro", "#4ECF2B");
-const LUCI: Person = new Person("Luci", "#E39CE4");
-const ESTHER: Person = new Person("Esther", "#F6EA27");
-const FIDE: Person = new Person("Fide", "#9CBCE4");
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { CalendarService } from './calendar.service';
+import { HOUR_LABELS, EMPTY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, SATURDAY, FRIDAY, SUNDAY } from '../model/master.data';
+import { Assignation, Day, Person, WeeklyCalendar } from '../model/model'
 
 @Component({
   selector: 'app-calendar',
@@ -15,49 +10,82 @@ const FIDE: Person = new Person("Fide", "#9CBCE4");
 })
 export class CalendarComponent implements OnInit {
 
+
   hourLabels: string[] = [];
   weeklyCalendar: WeeklyCalendar;
+  initIndex: number = -1;
+  endIndex: number = -1;
+  dayIndex: number = -1;
+  @ViewChild("dialog") dialog: any;
 
-  ngOnInit(): void {
-    this.hourLabels = ['08h', '09h', '10h', '11h', '12h', '13h', '14h', '15h', '16h', '17h', '18h', '19h', '20h', '21h', '22h'];
-    let monday = new Day(new Date("2023-02-06"), [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, ESTHER, ESTHER, VIO, VIO]);
-    let tuesday = new Day(new Date("2023-02-07"), [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, PEDRO, PEDRO, VIO, VIO]);
-    let wednesday = new Day(new Date("2023-02-08"), [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, FIDE, FIDE, VIO, VIO]);
-    let thursday = new Day(new Date("2023-02-09"), [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, EMPTY, EMPTY, VIO, VIO]);
-    let friday = new Day(new Date("2023-02-10"), [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, LUCI, LUCI, VIO, VIO]);
-    let saturday = new Day(new Date("2023-02-11"), [VIO, VIO, PEDRO, PEDRO, PEDRO, PEDRO, PEDRO, ESTHER, ESTHER, ESTHER, ESTHER, ESTHER, ESTHER, LUCI, LUCI]);
-    let sunday = new Day(new Date("2023-02-12"), [LUCI, LUCI, LUCI, LUCI, LUCI, LUCI, LUCI, FIDE, FIDE, FIDE, FIDE, FIDE, FIDE, VIO, VIO]);
-
-    this.weeklyCalendar = new WeeklyCalendar([monday, tuesday, wednesday, thursday, friday, saturday, sunday]);
-
-    console.log(JSON.stringify(this.weeklyCalendar));
-
+  constructor(private calendarService: CalendarService) {
+    // Creamos una semena tipo
+    this.weeklyCalendar = this.calendarService.currentWeeklyCalendar();
   }
 
+  ngOnInit(): void {
+    this.hourLabels = HOUR_LABELS;
+  }
+
+  /**
+   * Devuelve la clase de estilos en base a la asignación
+   * @param dayOfWeek 
+   * @param index 
+   * @returns 
+   */
   selectClass(dayOfWeek: Day, index: number) {
     if (dayOfWeek.hours[index] == EMPTY) {
       return "";
     }
-    if (index == 0 || dayOfWeek.hours[index] != dayOfWeek.hours[index-1]) {
+    if (index == 0 || dayOfWeek.hours[index] != dayOfWeek.hours[index - 1]) {
       return "assignation-start";
-    } 
-    if (index == dayOfWeek.hours.length-1 || dayOfWeek.hours[index] != dayOfWeek.hours[index+1]) {
+    }
+    if (index == dayOfWeek.hours.length - 1 || dayOfWeek.hours[index] != dayOfWeek.hours[index + 1]) {
       return "assignation-end";
     }
 
     return "assignation";
   }
 
-  isAssignationStart(dayOfWeek: Day, index: number) {
+  /**
+   * Devuelve true si la hora corresponde a un inicio de asignación
+   * @param dayOfWeek 
+   * @param index 
+   * @returns 
+   */
+  isAssignationStart(dayOfWeek: Day, index: number): boolean {
     if (dayOfWeek.hours[index] == EMPTY) {
       return false;
     }
-    if (index == 0 || dayOfWeek.hours[index] != dayOfWeek.hours[index-1]) {
+    if (index == 0 || dayOfWeek.hours[index] != dayOfWeek.hours[index - 1]) {
       return true;
-    } 
+    }
 
     return false;
   }
 
+  /**
+   * Abre el diálogo para asignar horas
+   * @param day 
+   * @param index 
+   */
+  assignationDialog(day: Day, index: number) {
+    console.log("asignando horas", day, index);
+    this.initIndex = index;
+    let i = index;
+    while (i < day.hours.length - 1 && day.hours[i+1] == EMPTY) {
+      i++;
+    }
+    this.endIndex = i;
+    this.dayIndex = day.index;
+    this.dialog.show();
+  }
 
+  assign(ev: Assignation) {
+    let day = this.weeklyCalendar.days.find(d => d.index === ev.day);
+
+    for (let i=ev.init; i<=ev.end; i++) {
+      day.hours[i] = ev.person;
+    }
+  }
 }
