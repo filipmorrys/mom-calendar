@@ -20,13 +20,13 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.hourLabels = ['08h', '09h', '10h', '11h', '12h', '13h', '14h', '15h', '16h', '17h', '18h', '19h', '20h', '21h', '22h'];
-    let monday = new Day('Lunes', [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, ESTHER, ESTHER, VIO, VIO]);
-    let tuesday = new Day('Martes', [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, PEDRO, PEDRO, VIO, VIO]);
-    let wednesday = new Day('Miércoles', [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, FIDE, FIDE, VIO, VIO]);
-    let thursday = new Day('Jueves', [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, EMPTY, EMPTY, VIO, VIO]);
-    let friday = new Day('Viernes', [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, LUCI, LUCI, VIO, VIO]);
-    let saturday = new Day('Sábado', [VIO, VIO, PEDRO, PEDRO, PEDRO, PEDRO, PEDRO, ESTHER, ESTHER, ESTHER, ESTHER, ESTHER, ESTHER, LUCI, LUCI]);
-    let sunday = new Day('Domingo', [LUCI, LUCI, LUCI, LUCI, LUCI, LUCI, LUCI, FIDE, FIDE, FIDE, FIDE, FIDE, FIDE, VIO, VIO]);
+    let monday = new Day(new Date("2023-02-06"), [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, ESTHER, ESTHER, VIO, VIO]);
+    let tuesday = new Day(new Date("2023-02-07"), [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, PEDRO, PEDRO, VIO, VIO]);
+    let wednesday = new Day(new Date("2023-02-08"), [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, FIDE, FIDE, VIO, VIO]);
+    let thursday = new Day(new Date("2023-02-09"), [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, EMPTY, EMPTY, VIO, VIO]);
+    let friday = new Day(new Date("2023-02-10"), [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, LUCI, LUCI, VIO, VIO]);
+    let saturday = new Day(new Date("2023-02-11"), [VIO, VIO, PEDRO, PEDRO, PEDRO, PEDRO, PEDRO, ESTHER, ESTHER, ESTHER, ESTHER, ESTHER, ESTHER, LUCI, LUCI]);
+    let sunday = new Day(new Date("2023-02-12"), [LUCI, LUCI, LUCI, LUCI, LUCI, LUCI, LUCI, FIDE, FIDE, FIDE, FIDE, FIDE, FIDE, VIO, VIO]);
 
     this.weeklyCalendar = new WeeklyCalendar([monday, tuesday, wednesday, thursday, friday, saturday, sunday]);
 

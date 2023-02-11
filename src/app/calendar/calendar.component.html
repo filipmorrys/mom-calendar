@@ -1,4 +1,12 @@
+<!-- SELECCIÓN DE SEMENA -->
+<section class="week-selection">
+    <div class="left"><i class="fa-solid fa-angle-left"></i></div>
+    <div class="week-name">{{weeklyCalendar.weekName()}}</div>
+    <div class="right"><i class="fa-solid fa-angle-right"></i></div>
+</section>
+<!-- CALENDARIO DE LA SEMANA -->
 <section class="calendar">
+    <!-- EJE TEMPORAL -->
     <section class="temporal-edge">
         <div class="hour">
             Hora
@@ -7,9 +15,12 @@
             {{hour}}
         </div>
     </section>
+
+    <!-- DÍAS DE LA SEMANA -->
     <section *ngFor="let dayOfWeek of weeklyCalendar.days" class="day-of-week">
         <div class="day-header">
-            {{dayOfWeek.name}}
+            <div class="day-name">{{dayOfWeek.dayOfWeek()}}</div>
+            <div class="day-number">{{dayOfWeek.dayOfMonth()}}</div>
         </div>
         <div *ngFor="let person of dayOfWeek.hours; let i = index" class="container">
             <div *ngIf="person.name != ''" [ngClass]="selectClass(dayOfWeek, i)" [ngStyle]="{'background-color': person.color}">
