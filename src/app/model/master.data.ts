@@ -4,7 +4,7 @@ export const EMPTY: Person = new Person("", "#FFFFFF");
 export const VIO: Person = new Person("Vio", "#B9C2D3");
 export const PEDRO: Person = new Person("Pedro", "#4ECF2B");
 export const LUCI: Person = new Person("Luci", "#E39CE4");
-export const ESTHER: Person = new Person("Esther", "#F6EA27");
+export const ESTER: Person = new Person("Ester", "#F6EA27");
 export const FIDE: Person = new Person("Fide", "#9CBCE4");
 
 export const MONDAY = [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, EMPTY, EMPTY, VIO, VIO]; 

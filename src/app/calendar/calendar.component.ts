@@ -10,7 +10,6 @@ import { Assignation, Day, Person, WeeklyCalendar } from '../model/model'
 })
 export class CalendarComponent implements OnInit {
 
-
   hourLabels: string[] = [];
   weeklyCalendar: WeeklyCalendar;
   initIndex: number = -1;
@@ -73,7 +72,7 @@ export class CalendarComponent implements OnInit {
     console.log("asignando horas", day, index);
     this.initIndex = index;
     let i = index;
-    while (i < day.hours.length - 1 && day.hours[i+1] == EMPTY) {
+    while (i < day.hours.length - 1 && day.hours[i + 1] == EMPTY) {
       i++;
     }
     this.endIndex = i;
@@ -84,8 +83,16 @@ export class CalendarComponent implements OnInit {
   assign(ev: Assignation) {
     let day = this.weeklyCalendar.days.find(d => d.index === ev.day);
 
-    for (let i=ev.init; i<=ev.end; i++) {
+    for (let i = ev.init; i <= ev.end; i++) {
       day.hours[i] = ev.person;
     }
+  }
+
+  nextWeek() {
+    this.weeklyCalendar = this.calendarService.nextWeeklyCalendar(this.weeklyCalendar);
+  }
+
+  previousWeek() {
+    this.weeklyCalendar = this.calendarService.previousWeeklyCalendar(this.weeklyCalendar);
   }
 }

@@ -1,8 +1,8 @@
 <!-- SELECCIÓN DE SEMENA -->
 <section class="week-selection">
-    <div class="left"><i class="fa-solid fa-angle-left"></i></div>
+    <div class="left" (click)="previousWeek()"><i class="fa-solid fa-angle-left"></i></div>
     <div class="week-name">{{weeklyCalendar.weekName()}}</div>
-    <div class="right"><i class="fa-solid fa-angle-right"></i></div>
+    <div class="right" (click)="nextWeek()"><i class="fa-solid fa-angle-right"></i></div>
 </section>
 <!-- CALENDARIO DE LA SEMANA -->
 <section class="calendar">

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { ESTHER, FIDE, HOUR_LABELS, LUCI, PEDRO } from '../model/master.data';
+import { ESTER, FIDE, HOUR_LABELS, LUCI, PEDRO } from '../model/master.data';
 import { Assignation, Person } from '../model/model';
 
 @Component({
@@ -21,7 +21,7 @@ export class DialogComponent implements OnChanges, OnInit {
   assignation: Assignation;
 
   ngOnInit(): void {
-    this.persons = [FIDE, PEDRO, ESTHER, LUCI];
+    this.persons = [FIDE, PEDRO, ESTER, LUCI];
     this.assignation = new Assignation(0, 0, 0, null);
   }
 
