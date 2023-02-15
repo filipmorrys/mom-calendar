@@ -26,8 +26,7 @@
             <div *ngIf="person.name != ''" [ngClass]="selectClass(dayOfWeek, i)" [ngStyle]="{'background-color': person.color}">
                 <ng-container *ngIf="isAssignationStart(dayOfWeek, i)">{{ person.name }}</ng-container>
             </div>
-            <div *ngIf="person.name == ''" class="empty-cell">
-                <i class="fa-solid fa-plus" id="add-assignation-button" (click)="assignationDialog(dayOfWeek, i)"></i>
+            <div *ngIf="person.name == ''" class="empty-cell" (click)="assignationDialog(dayOfWeek, i)">
             </div>
         </div>
     </section>

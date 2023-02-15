@@ -33,12 +33,13 @@ export class DialogComponent implements OnChanges, OnInit {
     if (changes["end"]) {
       this.end = changes["end"].currentValue;
       console.log("end:", this.end);
-    }
-    if (changes["day"]) {
-      this.assignation = new Assignation(this.init, this.end, this.day, FIDE);
-      console.log("day:", this.day);
       this.initHours();
     }
+    if (changes["day"]) {
+      this.day = changes["day"].currentValue;
+      console.log("day:", this.day);
+    }
+    this.assignation = new Assignation(this.init, this.end, this.day, FIDE);
   }
 
   show() {
@@ -50,10 +51,12 @@ export class DialogComponent implements OnChanges, OnInit {
   }
 
   initHours() {
-    this.hours.slice(0, this.hours.length);
+    this.hours.splice(0, this.hours.length);
+    console.log("hours antes", this.hours);
     for (let i = this.init; i <= this.end; i++) {
       this.hours.push({ label: HOUR_LABELS[i], index: i });
     }
+    console.log("hours despues", this.hours);
   }
 
   assignPerson(form: any) {

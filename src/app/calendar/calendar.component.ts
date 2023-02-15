@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@
 import { CalendarService } from './calendar.service';
 import { HOUR_LABELS, EMPTY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, SATURDAY, FRIDAY, SUNDAY } from '../model/master.data';
 import { Assignation, Day, Person, WeeklyCalendar } from '../model/model'
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-calendar',

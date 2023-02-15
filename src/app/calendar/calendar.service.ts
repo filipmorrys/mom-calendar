@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { Day, WeeklyCalendar } from '../model/model';
-import { HOUR_LABELS, EMPTY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, SATURDAY, FRIDAY, SUNDAY } from '../model/master.data';
+import { EMPTY, VIO } from '../model/master.data';
 
 
 @Injectable({
@@ -73,19 +73,18 @@ export class CalendarService {
    */
   currentWeeklyCalendar() {
     let dates = this.datesOfCurrentWeek();
-
     return this.createWeeklyCalendar(dates);
   }
 
   private createWeeklyCalendar(dates: Date[]) {
     return new WeeklyCalendar([
-      new Day(dates[0], MONDAY),
-      new Day(dates[1], TUESDAY),
-      new Day(dates[2], WEDNESDAY),
-      new Day(dates[3], THURSDAY),
-      new Day(dates[4], FRIDAY),
-      new Day(dates[5], SATURDAY),
-      new Day(dates[6], SUNDAY)
+      new Day(dates[0], [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, EMPTY, EMPTY, VIO, VIO]),
+      new Day(dates[1], [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, EMPTY, EMPTY, VIO, VIO]),
+      new Day(dates[2], [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, EMPTY, EMPTY, VIO, VIO]),
+      new Day(dates[3], [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, EMPTY, EMPTY, VIO, VIO]),
+      new Day(dates[4], [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, EMPTY, EMPTY, VIO, VIO]),
+      new Day(dates[5], [VIO, VIO, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY]),
+      new Day(dates[6], [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, VIO, VIO])
     ]);
   }
 }

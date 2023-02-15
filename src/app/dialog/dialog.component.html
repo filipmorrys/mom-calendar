@@ -2,7 +2,7 @@
     <div class="dialog" [ngStyle]="{'visibility': visibility}">
         <div class="dialog-header">
             <div class="dialog-header-text">Añadir asignación</div>
-            <div class="dialog-header-close"><i class="fa-solid fa-xmark"></i></div>
+            <div class="dialog-header-close" (click)="hide()"><i class="fa-solid fa-xmark"></i></div>
         </div>
         <div class="dialog-form">
             <div class="field">
