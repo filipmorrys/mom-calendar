@@ -14,7 +14,7 @@
     text-align: center;
     border-bottom: 1px solid black;
     display: flex;
-    padding-right:10px ;
+    padding-right: 10px;
     align-items: center;
 }
 
@@ -22,6 +22,7 @@
     flex-grow: 1;
     text-align: center;
 }
+
 .day-number {
     font-weight: bold;
 }
@@ -91,7 +92,7 @@
 }
 
 .assignation-deletion i:hover {
-    opacity: 0.5;
+    opacity: 1;
 }
 
 .empty-cell {
@@ -117,7 +118,7 @@
     color: blue;
 }
 
-.week-selection {
+.calendar-header {
     line-height: 50px;
     background-color: lightgrey;
     display: flex;
@@ -125,6 +126,40 @@
     align-items: center;
     justify-content: center;
 }
+
+.calendar-header>.actions {
+    padding-right: 20px;
+}
+
+.calendar-header>.actions>i {
+    font-size: larger;
+    opacity: 0.5;
+}
+
+.calendar-header>.actions>i:hover {
+    opacity: 1;
+}
+
+.week-selection {
+    line-height: 50px;
+    background-color: lightgrey;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left>i,
+.right>i {
+    font-size: larger;
+    opacity: 0.5;
+}
+
+.left>i:hover,
+.right>i:hover {
+    opacity: 1;
+}
+
 
 .week-name {
     margin-left: 10px;

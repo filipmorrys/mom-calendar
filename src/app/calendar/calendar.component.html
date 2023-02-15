@@ -1,8 +1,13 @@
 <!-- SELECCIÓN DE SEMENA -->
-<section class="week-selection">
-    <div class="left" (click)="previousWeek()"><i class="fa-solid fa-angle-left"></i></div>
-    <div class="week-name">{{weeklyCalendar.weekName()}}</div>
-    <div class="right" (click)="nextWeek()"><i class="fa-solid fa-angle-right"></i></div>
+<section class="calendar-header">
+    <div class="week-selection">
+        <div class="left" (click)="previousWeek()"><i class="fa-solid fa-angle-left" title="Semana anterior"></i></div>
+        <div class="week-name">{{weeklyCalendar.weekName()}}</div>
+        <div class="right" (click)="nextWeek()"><i class="fa-solid fa-angle-right" title="Siguiente semena"></i></div>
+    </div>
+    <div class="actions">
+        <i class="fa-solid fa-share-from-square" title="Salvar semana"></i>
+    </div>
 </section>
 <!-- CALENDARIO DE LA SEMANA -->
 <section class="calendar">
@@ -23,10 +28,13 @@
             <div class="day-number">{{dayOfWeek.dayOfMonth()}}</div>
         </div>
         <div *ngFor="let person of dayOfWeek.hours; let i = index" class="container">
-            <div *ngIf="person.name != ''" [ngClass]="selectClass(dayOfWeek, i)" [ngStyle]="{'background-color': person.color}">
+            <div *ngIf="person.name != ''" [ngClass]="selectClass(dayOfWeek, i)"
+                [ngStyle]="{'background-color': person.color}">
                 <ng-container *ngIf="isAssignationStart(dayOfWeek, i)">
                     {{ person.name }}
-                    <div class="assignation-deletion" (click)="deleteAssignation(dayOfWeek, i)"><i class="fa-solid fa-xmark"></i></div>
+                    <div class="assignation-deletion" (click)="deleteAssignation(dayOfWeek, i)">
+                        <i class="fa-solid fa-xmark" title="Borrar asignación"></i>
+                    </div>
                 </ng-container>
             </div>
             <div *ngIf="person.name == ''" class="empty-cell" (click)="assignationDialog(dayOfWeek, i)">
