@@ -89,6 +89,16 @@ export class CalendarComponent implements OnInit {
     }
   }
 
+  deleteAssignation(day: Day, index: number) {
+    let d = this.weeklyCalendar.days.find(d => d.index == day.index);
+    let personName = d.hours[index].name;
+    let i = index;
+    while (i < d.hours.length-1 && d.hours[i].name == personName) {
+      d.hours[i] = EMPTY;
+      i++;
+    }
+  }
+
   nextWeek() {
     this.weeklyCalendar = this.calendarService.nextWeeklyCalendar(this.weeklyCalendar);
   }

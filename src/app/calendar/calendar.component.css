@@ -59,7 +59,7 @@
     padding: 10px 0px 0px 0px;
     font-weight: bold;
     font-size: 1.2em;
-
+    position: relative;
 }
 
 .assignation {
@@ -78,6 +78,20 @@
     border-bottom-left-radius: 0.5em;
     border-bottom-right-radius: 0.5em;
     min-width: 100px;
+}
+
+.assignation-deletion {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+
+.assignation-deletion i {
+    opacity: 0;
+}
+
+.assignation-deletion i:hover {
+    opacity: 0.5;
 }
 
 .empty-cell {

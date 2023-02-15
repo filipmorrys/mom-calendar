@@ -24,7 +24,10 @@
         </div>
         <div *ngFor="let person of dayOfWeek.hours; let i = index" class="container">
             <div *ngIf="person.name != ''" [ngClass]="selectClass(dayOfWeek, i)" [ngStyle]="{'background-color': person.color}">
-                <ng-container *ngIf="isAssignationStart(dayOfWeek, i)">{{ person.name }}</ng-container>
+                <ng-container *ngIf="isAssignationStart(dayOfWeek, i)">
+                    {{ person.name }}
+                    <div class="assignation-deletion" (click)="deleteAssignation(dayOfWeek, i)"><i class="fa-solid fa-xmark"></i></div>
+                </ng-container>
             </div>
             <div *ngIf="person.name == ''" class="empty-cell" (click)="assignationDialog(dayOfWeek, i)">
             </div>
