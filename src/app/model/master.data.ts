@@ -1,11 +1,11 @@
 import { Person } from "./model";
 
 export const EMPTY: Person = new Person("", "#FFFFFF");
-export const VIO: Person = new Person("Vio", "#B9C2D3");
+export const VIO: Person = new Person("Vio", "#62ABDA");
 export const PEDRO: Person = new Person("Pedro", "#4ECF2B");
 export const LUCI: Person = new Person("Luci", "#E39CE4");
 export const ESTER: Person = new Person("Ester", "#F6EA27");
-export const FIDE: Person = new Person("Fide", "#9CBCE4");
+export const FIDE: Person = new Person("Fide", "#FFB006");
 
 export const PERSONS: Person[] = [ EMPTY, VIO, PEDRO, LUCI, ESTER, FIDE];
 
