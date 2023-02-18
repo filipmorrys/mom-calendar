@@ -7,6 +7,8 @@ export const LUCI: Person = new Person("Luci", "#E39CE4");
 export const ESTER: Person = new Person("Ester", "#F6EA27");
 export const FIDE: Person = new Person("Fide", "#9CBCE4");
 
+export const PERSONS: Person[] = [ EMPTY, VIO, PEDRO, LUCI, ESTER, FIDE];
+
 export const MONDAY = [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, EMPTY, EMPTY, VIO, VIO]; 
 export const TUESDAY = [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, EMPTY, EMPTY, VIO, VIO]; 
 export const WEDNESDAY = [VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, VIO, EMPTY, EMPTY, VIO, VIO]; 

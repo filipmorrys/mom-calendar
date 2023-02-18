@@ -2,10 +2,10 @@
 <section class="calendar-header">
     <div class="week-selection">
         <div class="left" (click)="previousWeek()"><i class="fa-solid fa-angle-left" title="Semana anterior"></i></div>
-        <div class="week-name">{{weeklyCalendar.weekName()}}</div>
+        <div class="week-name">{{weeklyCalendar.name}}</div>
         <div class="right" (click)="nextWeek()"><i class="fa-solid fa-angle-right" title="Siguiente semena"></i></div>
     </div>
-    <div class="actions">
+    <div class="actions" (click)="save()">
         <i class="fa-solid fa-share-from-square" title="Salvar semana"></i>
     </div>
 </section>
@@ -24,20 +24,20 @@
     <!-- DÍAS DE LA SEMANA -->
     <section *ngFor="let dayOfWeek of weeklyCalendar.days" class="day-of-week">
         <div class="day-header">
-            <div class="day-name">{{dayOfWeek.dayOfWeek()}}</div>
-            <div class="day-number">{{dayOfWeek.dayOfMonth()}}</div>
+            <div class="day-name">{{dayOfWeek.dayOfWeek}}</div>
+            <div class="day-number">{{dayOfWeek.date.getDate()}}</div>
         </div>
         <div *ngFor="let person of dayOfWeek.hours; let i = index" class="container">
-            <div *ngIf="person.name != ''" [ngClass]="selectClass(dayOfWeek, i)"
-                [ngStyle]="{'background-color': person.color}">
+            <div *ngIf="person != ''" [ngClass]="selectClass(dayOfWeek, i)"
+                [ngStyle]="{'background-color': getPersonColor(person)}">
                 <ng-container *ngIf="isAssignationStart(dayOfWeek, i)">
-                    {{ person.name }}
+                    {{ person }}
                     <div class="assignation-deletion" (click)="deleteAssignation(dayOfWeek, i)">
                         <i class="fa-solid fa-xmark" title="Borrar asignación"></i>
                     </div>
                 </ng-container>
             </div>
-            <div *ngIf="person.name == ''" class="empty-cell" (click)="assignationDialog(dayOfWeek, i)">
+            <div *ngIf="person == ''" class="empty-cell" (click)="assignationDialog(dayOfWeek, i)">
             </div>
         </div>
     </section>
