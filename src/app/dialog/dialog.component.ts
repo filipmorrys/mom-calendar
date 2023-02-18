@@ -52,11 +52,10 @@ export class DialogComponent implements OnChanges, OnInit {
 
   initHours() {
     this.hours.splice(0, this.hours.length);
-    console.log("hours antes", this.hours);
     for (let i = this.init; i <= this.end; i++) {
       this.hours.push({ label: HOUR_LABELS[i], index: i });
     }
-    console.log("hours despues", this.hours);
+    console.log("Combo de horas", this.hours);
   }
 
   assignPerson(form: any) {

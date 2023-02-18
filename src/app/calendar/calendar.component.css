@@ -134,6 +134,7 @@
 .calendar-header>.actions>i {
     font-size: larger;
     opacity: 0.5;
+    margin-left: 10px;
 }
 
 .calendar-header>.actions>i:hover {

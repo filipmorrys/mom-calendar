@@ -15,16 +15,16 @@ export class CalendarService {
 
   constructor(private http: HttpClient) { }
 
-    /**
+  /**
    * Devuelve el calendario de la semana actual. Si hay uno en base de datos lo obtiene, si no
    * devuelve una semana tipo. 
    * @returns devuelve el calendario de la semana actual.
    */
-    currentWeeklyCalendar(): Observable<WeeklyCalendar> {
-      let dates = this.datesOfCurrentWeek();
-      return this.getWeeklyCalendar(dates);
-    }
-  
+  currentWeeklyCalendar(): Observable<WeeklyCalendar> {
+    let dates = this.datesOfCurrentWeek();
+    return this.getWeeklyCalendar(dates);
+  }
+
   /**
    * Muestra el calendario de la semana anterior
    * @param weeklyCalendar semana actual
@@ -53,36 +53,50 @@ export class CalendarService {
     return this.getWeeklyCalendar(dates);
   }
 
+    /**
+     * Muestra el calendario de una semana concreta 
+     * @param weeklyCalendar semana concreta
+     * @returns 
+     */
+    customWeeklyCalendar(weeklyCalendar: WeeklyCalendar): Observable<WeeklyCalendar> {
+      let firstDate = weeklyCalendar.days[0].date;
+      let m = moment(firstDate);
+  
+      let dates = this.datesOfWeek(m);
+      return this.getWeeklyCalendar(dates);
+    }
+  
   private getWeeklyCalendar(dates: Date[]): Observable<WeeklyCalendar> {
-    let weekId = dates[0].toISOString().slice(0,10);
+    let weekId = dates[0].toISOString().slice(0, 10);
     let subject = new BehaviorSubject<WeeklyCalendar>(this.newWeeklyCalendar(dates));
-    this.http.get(API_URL+"/"+weekId)
-    .pipe(
-      map(
-        // Transformación necesaria porque el campo date me llega como string
-        (cal) => transformWeeklyCalendar(cal)
+    this.http.get(API_URL + "/" + weekId)
+      .pipe(
+        map(
+          // Transformación necesaria porque el campo date me llega como string
+          (cal) => transformWeeklyCalendar(cal)
+        )
       )
-    )
-    .subscribe(subject);
+      .subscribe(subject);
     return subject;
   }
 
-  saveWeeklyCalendar(cal: WeeklyCalendar) {
-    this.http.post<WeeklyCalendar>(API_URL, cal, {headers: HTTP_HEADERS})
-    .subscribe(
-      res => console.log("Calendario guardado", res)
-    );
+  saveWeeklyCalendar(cal: WeeklyCalendar): Observable<WeeklyCalendar> {
+    return this.http.post<WeeklyCalendar>(API_URL, cal, { headers: HTTP_HEADERS });
+  }
 
+  deleteWeeklyCalendar(id: string): Observable<void> {
+    console.log("DELETE " + API_URL + "/" + id)
+    return this.http.delete<void>(API_URL + "/" + id);
   }
 
   private newWeeklyCalendar(dates: Date[]) {
     return weeklyCalendar([
-      day(dates[0], ['Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', '', '', 'Vio', 'Vio']),
-      day(dates[1], ['Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', '', '', 'Vio', 'Vio']),
-      day(dates[2], ['Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', '', '', 'Vio', 'Vio']),
-      day(dates[3], ['Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', '', '', 'Vio', 'Vio']),
-      day(dates[4], ['Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', '', '', 'Vio', 'Vio']),
-      day(dates[5], ['Vio', 'Vio',  '', '', '', '', '', '', '', '', '', '', '', '', '']),
+      day(dates[0], ['Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', '', '', 'Vio', 'Vio']),
+      day(dates[1], ['Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', '', '', 'Vio', 'Vio']),
+      day(dates[2], ['Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', '', '', 'Vio', 'Vio']),
+      day(dates[3], ['Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', '', '', 'Vio', 'Vio']),
+      day(dates[4], ['Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', 'Vio', '', '', 'Vio', 'Vio']),
+      day(dates[5], ['Vio', 'Vio', '', '', '', '', '', '', '', '', '', '', '', '', '']),
       day(dates[6], ['', '', '', '', '', '', '', '', '', '', '', '', '', 'Vio', 'Vio'])
     ]);
   }
@@ -128,6 +142,7 @@ export class CalendarService {
 
 
 }
+
 function transformWeeklyCalendar(cal: any): WeeklyCalendar {
   let days: Day[] = [];
   for (let dayOfWeek of cal.days) {

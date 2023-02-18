@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@
 import { CalendarService } from './calendar.service';
 import { HOUR_LABELS, EMPTY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, SATURDAY, FRIDAY, SUNDAY, PERSONS } from '../model/master.data';
 import { Assignation, Day, Person, WeeklyCalendar } from '../model/model'
-import { IfStmt } from '@angular/compiler';
+import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -29,7 +29,7 @@ export class CalendarComponent implements OnInit {
           this.weeklyCalendar = res;
           console.log("Calendario recibido: ", this.weeklyCalendar);
         }
-      }, 
+      },
       (err) => {
         console.log("Error obtenido del GET", err);
       }
@@ -140,8 +140,74 @@ export class CalendarComponent implements OnInit {
   }
 
 
+  /**
+   * Salva la semana actual en base de datos
+   */
   save() {
     console.log("Salvando calendario", this.weeklyCalendar);
-    this.calendarService.saveWeeklyCalendar(this.weeklyCalendar);
+    this.calendarService.saveWeeklyCalendar(this.weeklyCalendar)
+      .subscribe(
+        (res) => {
+          Swal.fire({
+            title: 'Guardado!',
+            text: `Calendario ${this.weeklyCalendar.name} guardado correctamente`,
+            icon: 'info',
+            confirmButtonText: 'Continuar'
+          })
+        },
+        (err) => {
+          Swal.fire({
+            title: 'Error!',
+            text: `El Calendario ${this.weeklyCalendar.name} no se ha podido guardar!`,
+            icon: 'error',
+            confirmButtonText: 'Continuar'
+          })
+        }
+      );
   }
+
+  /**
+   * Elimina la semana actual de base de datos
+   */
+  delete() {
+    Swal.fire({
+      title: 'Borrar semana!',
+      text: `¿Seguro que quieres borrar la semana actual?`,
+      icon: 'info',
+      confirmButtonText: 'Continuar',
+      showCancelButton: true, 
+      cancelButtonText: 'Cancelar'
+    }).then((res) => {
+      if (res.isConfirmed) {
+        console.log("Confirmado el borrado");
+        this.confirmDelete();
+      } 
+    });
+  }
+
+  confirmDelete() {
+    this.calendarService.deleteWeeklyCalendar(this.weeklyCalendar.id)
+    .subscribe(
+      () => {
+        Swal.fire({
+          title: 'Borrado!',
+          text: `Calendario ${this.weeklyCalendar.name} borrado correctamente`,
+          icon: 'info',
+          confirmButtonText: 'Continuar'
+        });
+        this.calendarService.customWeeklyCalendar(this.weeklyCalendar).subscribe(
+          (res) => this.weeklyCalendar = res
+        );
+      }, 
+      (err) => {
+        Swal.fire({
+          title: 'Error!',
+          text: `El Calendario ${this.weeklyCalendar.name} no se ha podido borrar!`,
+          icon: 'error',
+          confirmButtonText: 'Continuar'
+        })
+      }
+    )
+  }
+
 }

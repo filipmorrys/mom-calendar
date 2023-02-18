@@ -5,8 +5,9 @@
         <div class="week-name">{{weeklyCalendar.name}}</div>
         <div class="right" (click)="nextWeek()"><i class="fa-solid fa-angle-right" title="Siguiente semena"></i></div>
     </div>
-    <div class="actions" (click)="save()">
-        <i class="fa-solid fa-share-from-square" title="Salvar semana"></i>
+    <div class="actions" >
+        <i class="fa-solid fa-trash" title="Borrar semana" (click)="delete()"></i>
+        <i class="fa-solid fa-share-from-square" title="Salvar semana" (click)="save()"></i>
     </div>
 </section>
 <!-- CALENDARIO DE LA SEMANA -->
