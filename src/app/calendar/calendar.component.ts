@@ -106,7 +106,7 @@ export class CalendarComponent implements OnInit {
     let d = this.weeklyCalendar.days.find(d => d.index == day.index);
     let personName = d.hours[index];
     let i = index;
-    while (i < d.hours.length - 1 && d.hours[i] == personName) {
+    while (i <= d.hours.length - 1 && d.hours[i] == personName) {
       d.hours[i] = '';
       i++;
     }
