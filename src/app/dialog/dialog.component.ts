@@ -28,17 +28,17 @@ export class DialogComponent implements OnChanges, OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes["init"]) {
       this.init = changes["init"].currentValue;
-      console.log("init:", this.init);
+      console.log("OnChanges init:", this.init);
     }
     if (changes["end"]) {
       this.end = changes["end"].currentValue;
-      console.log("end:", this.end);
-      this.initHours();
+      console.log("OnChanges end:", this.end);
     }
     if (changes["day"]) {
       this.day = changes["day"].currentValue;
-      console.log("day:", this.day);
+      console.log("OnChanges day:", this.day);
     }
+    this.initHours();
     this.assignation = new Assignation(this.init, this.end, this.day, FIDE);
   }
 
