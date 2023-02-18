@@ -39,10 +39,9 @@
 }
 
 .container {
-    height: 51px;
-    background-color: aliceblue;
+    height: 51gbpx;
+    background-color: white;
     text-align: center;
-    /*border-bottom: 1px solid darkgray;*/
     min-width: 100px;
     padding: 0px;
 
