@@ -1,12 +1,36 @@
 
-export function weeklyCalendar(days: Day[]) : WeeklyCalendar {
-    let id = days[0].date.toISOString().slice(0,10);
+export interface MonthlyCalendar {
+    id: string;
+    name: string;
+    firstDay: Date;
+    weeks: WeeklyCalendar[];
+}
+
+/**
+ * Crea un calendario mensual
+ * @param firstDay El primer día del mes
+ * @param weeks todos los calendarios mensuales del mes. 
+ */
+export function monthlyCalendar(firstDay: Date, weeks: WeeklyCalendar[]): MonthlyCalendar {
+    let id = firstDay.toISOString().slice(0, 10);
+    let name = getMonth(firstDay) + " de " + firstDay.getFullYear;
+    return {
+        id: id,
+        name: name,
+        firstDay: firstDay,
+        weeks: weeks
+    }
+}
+
+export function weeklyCalendar(days: Day[]): WeeklyCalendar {
+    let id = days[0].date.toISOString().slice(0, 10);
     let firstDay = days[0];
     let lastDay = days[6];
     let name = firstDay.dayAndMonth + " - " + lastDay.dayAndMonth;
 
-    return {id: id, name: name, days: days};
+    return { id: id, name: name, days: days };
 }
+
 
 /**
  * Interfaz de calendario semanal
@@ -19,11 +43,11 @@ export interface WeeklyCalendar {
 
 export function day(date: Date, hours: string[]): Day {
     let index = date.getDay();
-    let id = date.toISOString().slice(0,10);
+    let id = date.toISOString().slice(0, 10);
     let dayOfWeek = getDayOfWeek(date);
     let dayAndMonth = getDayAndMonth(date);
 
-    return {id: id, index: index, date: date, hours: hours, dayOfWeek: dayOfWeek, dayAndMonth: dayAndMonth};
+    return { id: id, index: index, date: date, hours: hours, dayOfWeek: dayOfWeek, dayAndMonth: dayAndMonth };
 }
 
 function getDayOfWeek(date: Date): string {
@@ -107,7 +131,7 @@ export class Assignation {
     day: number;
     person: Person;
 
-    constructor(init: number, end:number, day:number, person: Person) {
+    constructor(init: number, end: number, day: number, person: Person) {
         this.init = init;
         this.end = end;
         this.day = day;

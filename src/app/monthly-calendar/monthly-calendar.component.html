@@ -1,0 +1,169 @@
+<section class="calendar-header">
+    <div class="month-selection">
+        <div class="left"><i class="fa-solid fa-angle-left" title="Mes anterior"></i></div>
+        <div class="month-name">Febrero de 2023</div>
+        <div class="right"><i class="fa-solid fa-angle-right" title="Siguiente mes"></i></div>
+    </div>
+    <div class="actions">
+        <i class="fa-solid fa-trash" title="Borrar semana"></i>
+        <i class="fa-solid fa-share-from-square" title="Salvar semana"></i>
+    </div>
+</section>
+<!-- CALENDARIO -->
+<section class="calendar">
+
+    <div class="day-of-week">
+        <div class="day-header">
+            <div class="day-name">
+                Lunes
+            </div>
+        </div>
+        <div *ngFor="let monday of days(0)" class="day-container">
+            <div class="day-number">
+                {{monday.date.getDate()}}
+            </div>
+            <div class="assignation">
+                08:00 Vio
+            </div>
+            <div class="assignation">
+                19:00 Fide
+            </div>
+            <div class="assignation">
+                21:00 Vio
+            </div>
+        </div>
+    </div>
+
+    <div class="day-of-week">
+        <div class="day-header">
+            <div class="day-name">
+                Martes
+            </div>
+        </div>
+        <div *ngFor="let tuesday of days(1)" class="day-container">
+            <div class="day-number">
+                {{tuesday.date.getDate()}}
+            </div>
+            <div class="assignation">
+                08:00 Vio
+            </div>
+            <div class="assignation">
+                19:00 Fide
+            </div>
+            <div class="assignation">
+                21:00 Vio
+            </div>
+        </div>
+    </div>
+
+    <div class="day-of-week">
+        <div class="day-header">
+            <div class="day-name">
+                Miércoles
+            </div>
+        </div>
+        <div *ngFor="let wednesday of days(2)" class="day-container">
+            <div class="day-number">
+                {{wednesday.date.getDate()}}
+            </div>
+            <div class="assignation">
+                08:00 Vio
+            </div>
+            <div class="assignation">
+                19:00 Fide
+            </div>
+            <div class="assignation">
+                21:00 Vio
+            </div>
+        </div>
+    </div>
+
+    <div class="day-of-week">
+        <div class="day-header">
+            <div class="day-name">
+                Jueves
+            </div>
+        </div>
+        <div *ngFor="let thursday of days(3)" class="day-container">
+            <div class="day-number">
+                {{thursday.date.getDate()}}
+            </div>
+            <div class="assignation">
+                08:00 Vio
+            </div>
+            <div class="assignation">
+                19:00 Fide
+            </div>
+            <div class="assignation">
+                21:00 Vio
+            </div>
+        </div>
+    </div>
+
+    <div class="day-of-week">
+        <div class="day-header">
+            <div class="day-name">
+                Viernes
+            </div>
+        </div>
+        <div *ngFor="let friday of days(4)" class="day-container">
+            <div class="day-number">
+                {{friday.date.getDate()}}
+            </div>
+            <div class="assignation">
+                08:00 Vio
+            </div>
+            <div class="assignation">
+                19:00 Fide
+            </div>
+            <div class="assignation">
+                21:00 Vio
+            </div>
+        </div>
+    </div>
+
+    <div class="day-of-week">
+        <div class="day-header">
+            <div class="day-name">
+                Sábado
+            </div>
+        </div>
+        <div *ngFor="let saturday of days(5)" class="day-container">
+            <div class="day-number">
+                {{saturday.date.getDate()}}
+            </div>
+            <div class="assignation">
+                08:00 Vio
+            </div>
+            <div class="assignation">
+                19:00 Fide
+            </div>
+            <div class="assignation">
+                21:00 Vio
+            </div>
+        </div>
+    </div>
+
+    <div class="day-of-week">
+        <div class="day-header">
+            <div class="day-name">
+                Domingo
+            </div>
+        </div>
+        <div *ngFor="let sunday of days(6)" class="day-container">
+            <div class="day-number">
+                {{sunday.date.getDate()}}
+            </div>
+            <div class="assignation">
+                08:00 Vio
+            </div>
+            <div class="assignation">
+                19:00 Fide
+            </div>
+            <div class="assignation">
+                21:00 Vio
+            </div>
+        </div>
+    </div>
+
+</section>

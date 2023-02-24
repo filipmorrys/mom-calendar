@@ -22,6 +22,10 @@ export class CalendarComponent implements OnInit {
   subscription: Subscription;
 
   constructor(private calendarService: CalendarService) {
+
+  }
+
+  ngOnInit(): void {
     // Creamos una semena tipo
     this.subscription = this.calendarService.currentWeeklyCalendar().subscribe(
       (res) => {
@@ -34,10 +38,7 @@ export class CalendarComponent implements OnInit {
         console.log("Error obtenido del GET", err);
       }
     );
-  }
-
-  ngOnInit(): void {
-    this.hourLabels = HOUR_LABELS;
+     this.hourLabels = HOUR_LABELS;
   }
 
   /**
@@ -175,39 +176,39 @@ export class CalendarComponent implements OnInit {
       text: `¿Seguro que quieres borrar la semana actual?`,
       icon: 'info',
       confirmButtonText: 'Continuar',
-      showCancelButton: true, 
+      showCancelButton: true,
       cancelButtonText: 'Cancelar'
     }).then((res) => {
       if (res.isConfirmed) {
         console.log("Confirmado el borrado");
         this.confirmDelete();
-      } 
+      }
     });
   }
 
   confirmDelete() {
     this.calendarService.deleteWeeklyCalendar(this.weeklyCalendar.id)
-    .subscribe(
-      () => {
-        Swal.fire({
-          title: 'Borrado!',
-          text: `Calendario ${this.weeklyCalendar.name} borrado correctamente`,
-          icon: 'info',
-          confirmButtonText: 'Continuar'
-        });
-        this.calendarService.customWeeklyCalendar(this.weeklyCalendar).subscribe(
-          (res) => this.weeklyCalendar = res
-        );
-      }, 
-      (err) => {
-        Swal.fire({
-          title: 'Error!',
-          text: `El Calendario ${this.weeklyCalendar.name} no se ha podido borrar!`,
-          icon: 'error',
-          confirmButtonText: 'Continuar'
-        })
-      }
-    )
+      .subscribe(
+        () => {
+          Swal.fire({
+            title: 'Borrado!',
+            text: `Calendario ${this.weeklyCalendar.name} borrado correctamente`,
+            icon: 'info',
+            confirmButtonText: 'Continuar'
+          });
+          this.calendarService.customWeeklyCalendar(this.weeklyCalendar).subscribe(
+            (res) => this.weeklyCalendar = res
+          );
+        },
+        (err) => {
+          Swal.fire({
+            title: 'Error!',
+            text: `El Calendario ${this.weeklyCalendar.name} no se ha podido borrar!`,
+            icon: 'error',
+            confirmButtonText: 'Continuar'
+          })
+        }
+      )
   }
 
 }

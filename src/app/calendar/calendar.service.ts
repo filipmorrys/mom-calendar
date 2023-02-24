@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { day, Day, weeklyCalendar, WeeklyCalendar } from '../model/model';
+import { day, Day, monthlyCalendar, MonthlyCalendar, weeklyCalendar, WeeklyCalendar } from '../model/model';
 
 const API_URL = "http://localhost:8979/mom/calendar/api";
 const HTTP_HEADERS = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -14,6 +14,61 @@ const HTTP_HEADERS = new HttpHeaders({ 'Content-Type': 'application/json' });
 export class CalendarService {
 
   constructor(private http: HttpClient) { }
+
+  currentMonthlyCalendar(): Observable<MonthlyCalendar> {
+    // primer día del mes actual
+    let m = moment().date(1);
+    let currMonth = m.month();
+    console.log("Primer día del mes actual", m);
+    // lunes de la primera semana del mes actual
+    m.weekday(1);
+    console.log("Lunes de la primera semana del mes actual", m);
+
+    let lastMonth = currMonth;
+    let strWeekIds: string = '';
+    let weekIds: string[] = [];
+    while (lastMonth == currMonth) {
+      if (strWeekIds != '') {
+        strWeekIds += ',';
+      }
+      let weekId = m.toDate().toISOString().slice(0, 10);
+      strWeekIds += weekId;
+      weekIds.push(weekId);
+      lastMonth = m.add(7, "days").month();
+    }
+
+    return this.http.get<WeeklyCalendar[]>(API_URL + "/calendars/" + strWeekIds)
+      .pipe(
+        map(
+          // Transformación necesaria porque el campo date me llega como string
+          (cals) => {
+            let calendars: WeeklyCalendar[] = [];
+            for (let cal of cals) {
+              calendars.push(transformWeeklyCalendar(cal));
+            }
+            return this.completeCalendars(weekIds, calendars);
+          }
+        ), 
+        map (
+          (cals) => monthlyCalendar(moment().date(1).toDate(), cals)
+        )
+      );
+
+  }
+
+  completeCalendars(weekIds: string[], calendars: WeeklyCalendar[]): WeeklyCalendar[] {
+    let weeks : WeeklyCalendar[] = [];
+    for (let weekId of weekIds) {
+      let week = calendars.find(c => c.id == weekId);
+      if (!week) {
+        let m = moment(weekId);
+        week = this.newWeeklyCalendar(this.datesOfWeek(m));
+      }
+      weeks.push(week);
+    }
+
+    return weeks;
+  }
 
   /**
    * Devuelve el calendario de la semana actual. Si hay uno en base de datos lo obtiene, si no
@@ -53,19 +108,19 @@ export class CalendarService {
     return this.getWeeklyCalendar(dates);
   }
 
-    /**
-     * Muestra el calendario de una semana concreta 
-     * @param weeklyCalendar semana concreta
-     * @returns 
-     */
-    customWeeklyCalendar(weeklyCalendar: WeeklyCalendar): Observable<WeeklyCalendar> {
-      let firstDate = weeklyCalendar.days[0].date;
-      let m = moment(firstDate);
-  
-      let dates = this.datesOfWeek(m);
-      return this.getWeeklyCalendar(dates);
-    }
-  
+  /**
+   * Muestra el calendario de una semana concreta 
+   * @param weeklyCalendar semana concreta
+   * @returns 
+   */
+  customWeeklyCalendar(weeklyCalendar: WeeklyCalendar): Observable<WeeklyCalendar> {
+    let firstDate = weeklyCalendar.days[0].date;
+    let m = moment(firstDate);
+
+    let dates = this.datesOfWeek(m);
+    return this.getWeeklyCalendar(dates);
+  }
+
   private getWeeklyCalendar(dates: Date[]): Observable<WeeklyCalendar> {
     let weekId = dates[0].toISOString().slice(0, 10);
     let subject = new BehaviorSubject<WeeklyCalendar>(this.newWeeklyCalendar(dates));
@@ -153,4 +208,5 @@ function transformWeeklyCalendar(cal: any): WeeklyCalendar {
   console.log("weeklyCalendar transformado", w);
   return w;
 }
+
 
