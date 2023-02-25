@@ -26,7 +26,11 @@ export class CalendarService {
     let firstDay = m.clone();
     let currMonth = m.month();
     // lunes de la primera semana del mes actual
-    m.weekday(1);
+    if (m.day() == 0) {
+      m.subtract(6, "days");
+    } else {
+      m.weekday(1);
+    }
     console.log("Lunes de la primera semana del mes actual", m.toISOString());
 
     let lastMonth = currMonth;
