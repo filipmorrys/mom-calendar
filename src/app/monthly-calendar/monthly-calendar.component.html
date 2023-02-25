@@ -1,10 +1,11 @@
 <section class="calendar-header">
     <div class="month-selection">
-        <div class="left"><i class="fa-solid fa-angle-left" title="Mes anterior"></i></div>
-        <div class="month-name">Febrero de 2023</div>
-        <div class="right"><i class="fa-solid fa-angle-right" title="Siguiente mes"></i></div>
+        <div class="left" (click)="previousMonth()"><i class="fa-solid fa-angle-left" title="Mes anterior"></i></div>
+        <div class="month-name">{{monthlyCalendar.name}}</div>
+        <div class="right" (click)="nextMonth()"><i class="fa-solid fa-angle-right" title="Siguiente mes"></i></div>
     </div>
     <div class="actions">
+        <i class="fa-solid fa-regular fa-print" title="Imprimir" (click)="print()"></i>
         <i class="fa-solid fa-trash" title="Borrar semana"></i>
         <i class="fa-solid fa-share-from-square" title="Salvar semana"></i>
     </div>
@@ -18,7 +19,7 @@
                 Lunes
             </div>
         </div>
-        <div *ngFor="let monday of days(0)" class="day-container">
+        <div *ngFor="let monday of days(0)" class="day-container" [ngClass]="calculateClasses(monday)">
             <div class="day-number">
                 {{monday.date.getDate()}}
             </div>
@@ -34,7 +35,7 @@
                 Martes
             </div>
         </div>
-        <div *ngFor="let tuesday of days(1)" class="day-container">
+        <div *ngFor="let tuesday of days(1)" class="day-container" [ngClass]="calculateClasses(tuesday)">
             <div class="day-number">
                 {{tuesday.date.getDate()}}
             </div>
@@ -50,7 +51,7 @@
                 Miércoles
             </div>
         </div>
-        <div *ngFor="let wednesday of days(2)" class="day-container">
+        <div *ngFor="let wednesday of days(2)" class="day-container" [ngClass]="calculateClasses(wednesday)">
             <div class="day-number">
                 {{wednesday.date.getDate()}}
             </div>
@@ -66,7 +67,7 @@
                 Jueves
             </div>
         </div>
-        <div *ngFor="let thursday of days(3)" class="day-container">
+        <div *ngFor="let thursday of days(3)" class="day-container" [ngClass]="calculateClasses(thursday)">
             <div class="day-number">
                 {{thursday.date.getDate()}}
             </div>
@@ -82,7 +83,7 @@
                 Viernes
             </div>
         </div>
-        <div *ngFor="let friday of days(4)" class="day-container">
+        <div *ngFor="let friday of days(4)" class="day-container" [ngClass]="calculateClasses(friday)">
             <div class="day-number">
                 {{friday.date.getDate()}}
             </div>
@@ -98,7 +99,7 @@
                 Sábado
             </div>
         </div>
-        <div *ngFor="let saturday of days(5)" class="day-container">
+        <div *ngFor="let saturday of days(5)" class="day-container" [ngClass]="calculateClasses(saturday)">
             <div class="day-number">
                 {{saturday.date.getDate()}}
             </div>
@@ -114,7 +115,7 @@
                 Domingo
             </div>
         </div>
-        <div *ngFor="let sunday of days(6)" class="day-container">
+        <div *ngFor="let sunday of days(6)" class="day-container" [ngClass]="calculateClasses(sunday)">
             <div class="day-number">
                 {{sunday.date.getDate()}}
             </div>

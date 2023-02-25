@@ -13,7 +13,7 @@ export interface MonthlyCalendar {
  */
 export function monthlyCalendar(firstDay: Date, weeks: WeeklyCalendar[]): MonthlyCalendar {
     let id = firstDay.toISOString().slice(0, 10);
-    let name = getMonth(firstDay) + " de " + firstDay.getFullYear;
+    let name = getMonth(firstDay) + " de " + firstDay.getFullYear();
     return {
         id: id,
         name: name,

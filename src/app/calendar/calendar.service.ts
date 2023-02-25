@@ -18,11 +18,16 @@ export class CalendarService {
   currentMonthlyCalendar(): Observable<MonthlyCalendar> {
     // primer día del mes actual
     let m = moment().date(1);
+    console.log("Primer día del mes actual", m.toISOString());
+    return this.getMonthlyCalendar(m);
+  }
+
+  getMonthlyCalendar(m: moment.Moment): Observable<MonthlyCalendar> {
+    let firstDay = m.clone();
     let currMonth = m.month();
-    console.log("Primer día del mes actual", m);
     // lunes de la primera semana del mes actual
     m.weekday(1);
-    console.log("Lunes de la primera semana del mes actual", m);
+    console.log("Lunes de la primera semana del mes actual", m.toISOString());
 
     let lastMonth = currMonth;
     let strWeekIds: string = '';
@@ -48,16 +53,16 @@ export class CalendarService {
             }
             return this.completeCalendars(weekIds, calendars);
           }
-        ), 
-        map (
-          (cals) => monthlyCalendar(moment().date(1).toDate(), cals)
+        ),
+        map(
+          (cals) => monthlyCalendar(firstDay.date(1).toDate(), cals)
         )
       );
 
   }
 
   completeCalendars(weekIds: string[], calendars: WeeklyCalendar[]): WeeklyCalendar[] {
-    let weeks : WeeklyCalendar[] = [];
+    let weeks: WeeklyCalendar[] = [];
     for (let weekId of weekIds) {
       let week = calendars.find(c => c.id == weekId);
       if (!week) {

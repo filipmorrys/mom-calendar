@@ -4,6 +4,7 @@ import { HOUR_LABELS, EMPTY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, SATURDAY, FRI
 import { Assignation, Day, Person, WeeklyCalendar } from '../model/model'
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-calendar',
@@ -209,6 +210,18 @@ export class CalendarComponent implements OnInit {
           })
         }
       )
+  }
+
+  print() {
+    let doc = new jsPDF('l', 'mm', [1900, 1900]);
+
+    doc.html(document.body, {
+      callback: function (doc) {
+        doc.save();
+      },
+      x: 40,
+      y: 40
+    });
   }
 
 }

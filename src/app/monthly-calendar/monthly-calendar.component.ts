@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import jsPDF from 'jspdf';
+import * as moment from 'moment';
 import { CalendarService } from '../calendar/calendar.service';
 import { HOUR_LABELS, PERSONS } from '../model/master.data';
 import { Day, MonthlyCalendar } from '../model/model';
@@ -55,5 +57,39 @@ export class MonthlyCalendarComponent implements OnInit {
     return assignations;
   }
 
+  calculateClasses(day: Day): string[] {
+    if (day.date.getMonth() != this.monthlyCalendar.firstDay.getMonth()) {
+      return ['out-of-month'];
+    }
+    return [];
+  }
+
+  previousMonth() {
+    let m = moment(this.monthlyCalendar.firstDay).subtract(1, 'months').date(1);
+    console.log("Previous month", m.toISOString());
+    this.calendarService.getMonthlyCalendar(m).subscribe(
+      (month) => this.monthlyCalendar = month
+    );
+  }
+
+  nextMonth() {
+    let m = moment(this.monthlyCalendar.firstDay).add(1, "months").date(1);
+    console.log("Next month", m.toISOString());
+    this.calendarService.getMonthlyCalendar(m).subscribe(
+      (month) => this.monthlyCalendar = month
+    );
+  }
+
+  print() {
+    let doc = new jsPDF('l', 'mm', [1900, 1900]);
+
+    doc.html(document.body, {
+      callback: function (doc) {
+        doc.save();
+      },
+      x: 40,
+      y: 40
+    });
+  }
 
 }

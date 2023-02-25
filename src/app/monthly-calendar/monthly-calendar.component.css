@@ -80,15 +80,19 @@
 }
 
 .day-container {
-    height: 150px;
+    height: 200px;
     border-bottom: 1px solid black;
+}
+
+.out-of-month {
+    opacity: 0.5;
 }
 
 .assignation {
     background-color: #FFB006;
     padding-left: 10px;
-    padding-top: 3px;
-    padding-bottom: 3px;
+    padding-top: 6px;
+    padding-bottom: 6px;
     margin: 1px;
-
+    font-size: 1.2em;
 }
