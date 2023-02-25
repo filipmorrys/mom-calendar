@@ -22,14 +22,8 @@
             <div class="day-number">
                 {{monday.date.getDate()}}
             </div>
-            <div class="assignation">
-                08:00 Vio
-            </div>
-            <div class="assignation">
-                19:00 Fide
-            </div>
-            <div class="assignation">
-                21:00 Vio
+            <div *ngFor="let assignation of assignations(monday)" class="assignation" [ngStyle]="{'background-color': assignation.color}">
+                {{assignation.initHour}}&nbsp;{{assignation.name}}
             </div>
         </div>
     </div>
@@ -44,14 +38,8 @@
             <div class="day-number">
                 {{tuesday.date.getDate()}}
             </div>
-            <div class="assignation">
-                08:00 Vio
-            </div>
-            <div class="assignation">
-                19:00 Fide
-            </div>
-            <div class="assignation">
-                21:00 Vio
+            <div *ngFor="let assignation of assignations(tuesday)" class="assignation" [ngStyle]="{'background-color': assignation.color}">
+                {{assignation.initHour}}&nbsp;{{assignation.name}}
             </div>
         </div>
     </div>
@@ -66,14 +54,8 @@
             <div class="day-number">
                 {{wednesday.date.getDate()}}
             </div>
-            <div class="assignation">
-                08:00 Vio
-            </div>
-            <div class="assignation">
-                19:00 Fide
-            </div>
-            <div class="assignation">
-                21:00 Vio
+            <div *ngFor="let assignation of assignations(wednesday)" class="assignation" [ngStyle]="{'background-color': assignation.color}">
+                {{assignation.initHour}}&nbsp;{{assignation.name}}
             </div>
         </div>
     </div>
@@ -88,14 +70,8 @@
             <div class="day-number">
                 {{thursday.date.getDate()}}
             </div>
-            <div class="assignation">
-                08:00 Vio
-            </div>
-            <div class="assignation">
-                19:00 Fide
-            </div>
-            <div class="assignation">
-                21:00 Vio
+            <div *ngFor="let assignation of assignations(thursday)" class="assignation" [ngStyle]="{'background-color': assignation.color}">
+                {{assignation.initHour}}&nbsp;{{assignation.name}}
             </div>
         </div>
     </div>
@@ -110,14 +86,8 @@
             <div class="day-number">
                 {{friday.date.getDate()}}
             </div>
-            <div class="assignation">
-                08:00 Vio
-            </div>
-            <div class="assignation">
-                19:00 Fide
-            </div>
-            <div class="assignation">
-                21:00 Vio
+            <div *ngFor="let assignation of assignations(friday)" class="assignation" [ngStyle]="{'background-color': assignation.color}">
+                {{assignation.initHour}}&nbsp;{{assignation.name}}
             </div>
         </div>
     </div>
@@ -132,14 +102,8 @@
             <div class="day-number">
                 {{saturday.date.getDate()}}
             </div>
-            <div class="assignation">
-                08:00 Vio
-            </div>
-            <div class="assignation">
-                19:00 Fide
-            </div>
-            <div class="assignation">
-                21:00 Vio
+            <div *ngFor="let assignation of assignations(saturday)" class="assignation" [ngStyle]="{'background-color': assignation.color}">
+                {{assignation.initHour}}&nbsp;{{assignation.name}}
             </div>
         </div>
     </div>
@@ -154,14 +118,8 @@
             <div class="day-number">
                 {{sunday.date.getDate()}}
             </div>
-            <div class="assignation">
-                08:00 Vio
-            </div>
-            <div class="assignation">
-                19:00 Fide
-            </div>
-            <div class="assignation">
-                21:00 Vio
+            <div *ngFor="let assignation of assignations(sunday)" class="assignation" [ngStyle]="{'background-color': assignation.color}">
+                {{assignation.initHour}}&nbsp;{{assignation.name}}
             </div>
         </div>
     </div>
