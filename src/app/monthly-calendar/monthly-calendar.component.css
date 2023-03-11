@@ -95,4 +95,15 @@
     padding-bottom: 6px;
     margin: 1px;
     font-size: 1.2em;
+    display: flex;
+}
+
+.assignation-name {
+    font-weight: bold;
+
+}
+
+.assignation-hour {
+    width: 50%;
+
 }

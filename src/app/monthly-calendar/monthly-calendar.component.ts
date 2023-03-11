@@ -39,13 +39,18 @@ export class MonthlyCalendarComponent implements OnInit {
 
   assignations(day: Day): any[] {
     let assignations = [];
-    let assignation = { name: '', initHour: '', color: '' };
+    let assignation = { name: '', initHour: '', finalHour: '', color: '' };
     for (let i = 0; i < day.hours.length; i++) {
       let name = day.hours[i];
       if (name != assignation.name) {
+        if (assignation.name != '') {
+          assignation.finalHour = HOUR_LABELS[i];
+        }
+        let initLabel = (HOUR_LABELS[i] == '08h') ? '...' : HOUR_LABELS[i];
         assignation = {
           name: name,
-          initHour: HOUR_LABELS[i],
+          initHour: initLabel,
+          finalHour: '...',
           color: PERSONS.find(p => p.name == name).color
         };
         if (assignation.name != '') {

@@ -24,7 +24,7 @@
                 {{monday.date.getDate()}}
             </div>
             <div *ngFor="let assignation of assignations(monday)" class="assignation" [ngStyle]="{'background-color': assignation.color}">
-                {{assignation.initHour}}&nbsp;{{assignation.name}}
+                <div class="assignation-hour">{{assignation.initHour}}&nbsp;-&nbsp;{{assignation.finalHour}}</div><div class="assignation-name">{{assignation.name}}</div>
             </div>
         </div>
     </div>
@@ -40,7 +40,7 @@
                 {{tuesday.date.getDate()}}
             </div>
             <div *ngFor="let assignation of assignations(tuesday)" class="assignation" [ngStyle]="{'background-color': assignation.color}">
-                {{assignation.initHour}}&nbsp;{{assignation.name}}
+                <div class="assignation-hour">{{assignation.initHour}}&nbsp;-&nbsp;{{assignation.finalHour}}</div><div class="assignation-name">{{assignation.name}}</div>
             </div>
         </div>
     </div>
@@ -56,7 +56,7 @@
                 {{wednesday.date.getDate()}}
             </div>
             <div *ngFor="let assignation of assignations(wednesday)" class="assignation" [ngStyle]="{'background-color': assignation.color}">
-                {{assignation.initHour}}&nbsp;{{assignation.name}}
+                <div class="assignation-hour">{{assignation.initHour}}&nbsp;-&nbsp;{{assignation.finalHour}}</div><div class="assignation-name">{{assignation.name}}</div>
             </div>
         </div>
     </div>
@@ -72,7 +72,7 @@
                 {{thursday.date.getDate()}}
             </div>
             <div *ngFor="let assignation of assignations(thursday)" class="assignation" [ngStyle]="{'background-color': assignation.color}">
-                {{assignation.initHour}}&nbsp;{{assignation.name}}
+                <div class="assignation-hour">{{assignation.initHour}}&nbsp;-&nbsp;{{assignation.finalHour}}</div><div class="assignation-name">{{assignation.name}}</div>
             </div>
         </div>
     </div>
@@ -88,7 +88,7 @@
                 {{friday.date.getDate()}}
             </div>
             <div *ngFor="let assignation of assignations(friday)" class="assignation" [ngStyle]="{'background-color': assignation.color}">
-                {{assignation.initHour}}&nbsp;{{assignation.name}}
+                <div class="assignation-hour">{{assignation.initHour}}&nbsp;-&nbsp;{{assignation.finalHour}}</div><div class="assignation-name">{{assignation.name}}</div>
             </div>
         </div>
     </div>
@@ -104,7 +104,7 @@
                 {{saturday.date.getDate()}}
             </div>
             <div *ngFor="let assignation of assignations(saturday)" class="assignation" [ngStyle]="{'background-color': assignation.color}">
-                {{assignation.initHour}}&nbsp;{{assignation.name}}
+                <div class="assignation-hour">{{assignation.initHour}}&nbsp;-&nbsp;{{assignation.finalHour}}</div><div class="assignation-name">{{assignation.name}}</div>
             </div>
         </div>
     </div>
@@ -120,7 +120,7 @@
                 {{sunday.date.getDate()}}
             </div>
             <div *ngFor="let assignation of assignations(sunday)" class="assignation" [ngStyle]="{'background-color': assignation.color}">
-                {{assignation.initHour}}&nbsp;{{assignation.name}}
+                <div class="assignation-hour">{{assignation.initHour}}&nbsp;-&nbsp;{{assignation.finalHour}}</div><div class="assignation-name">{{assignation.name}}</div>
             </div>
         </div>
     </div>
