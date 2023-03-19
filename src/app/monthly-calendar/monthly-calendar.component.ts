@@ -46,11 +46,11 @@ export class MonthlyCalendarComponent implements OnInit {
         if (assignation.name != '') {
           assignation.finalHour = HOUR_LABELS[i];
         }
-        let initLabel = (HOUR_LABELS[i] == '08h') ? '...' : HOUR_LABELS[i];
+        let initLabel = (HOUR_LABELS[i] == '08h') ? '00h' : HOUR_LABELS[i];
         assignation = {
           name: name,
           initHour: initLabel,
-          finalHour: '...',
+          finalHour: '00h',
           color: PERSONS.find(p => p.name == name).color
         };
         if (assignation.name != '') {
