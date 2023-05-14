@@ -57,9 +57,13 @@
     border-top-right-radius: 0.5em;
     min-width: 100px;
     padding: 10px 0px 0px 0px;
-    font-weight: bold;
     font-size: 1.2em;
     position: relative;
+}
+
+.assignation-start em {
+  font-weight: bold;
+  font-style: normal;
 }
 
 .assignation {

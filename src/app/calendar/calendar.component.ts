@@ -13,7 +13,6 @@ import jsPDF from 'jspdf';
 })
 export class CalendarComponent implements OnInit {
 
-
   hourLabels: string[] = [];
   weeklyCalendar: WeeklyCalendar;
   initIndex: number = -1;
@@ -44,9 +43,9 @@ export class CalendarComponent implements OnInit {
 
   /**
    * Devuelve la clase de estilos en base a la asignación
-   * @param dayOfWeek 
-   * @param index 
-   * @returns 
+   * @param dayOfWeek
+   * @param index
+   * @returns
    */
   selectClass(dayOfWeek: Day, index: number) {
     if (dayOfWeek.hours[index] == '') {
@@ -64,9 +63,9 @@ export class CalendarComponent implements OnInit {
 
   /**
    * Devuelve true si la hora corresponde a un inicio de asignación
-   * @param dayOfWeek 
-   * @param index 
-   * @returns 
+   * @param dayOfWeek
+   * @param index
+   * @returns
    */
   isAssignationStart(dayOfWeek: Day, index: number): boolean {
     if (dayOfWeek.hours[index] == '') {
@@ -81,8 +80,8 @@ export class CalendarComponent implements OnInit {
 
   /**
    * Abre el diálogo para asignar horas
-   * @param day 
-   * @param index 
+   * @param day
+   * @param index
    */
   assignationDialog(day: Day, index: number) {
     console.log("asignando horas", day, index);
@@ -223,5 +222,17 @@ export class CalendarComponent implements OnInit {
       y: 40
     });
   }
+
+  getAssignationHours(day: Day, person: string, index: number) {
+    let label = (HOUR_LABELS[index] === '08h') ? '00h' : HOUR_LABELS[index];
+    let hours = label + ' - ';
+    while (day.hours[index] === person && index < day.hours.length-1) {
+      index++;
+    }
+    label = (HOUR_LABELS[index] === '22h') ? '00h' : HOUR_LABELS[index];
+    hours += label;
+    return hours;
+  }
+
 
 }

@@ -33,7 +33,7 @@
             <div *ngIf="person != ''" [ngClass]="selectClass(dayOfWeek, i)"
                 [ngStyle]="{'background-color': getPersonColor(person)}">
                 <ng-container *ngIf="isAssignationStart(dayOfWeek, i)">
-                    {{ person }}
+                    <em>{{ person }}</em>&nbsp;({{ getAssignationHours(dayOfWeek, person, i) }})
                     <div class="assignation-deletion" (click)="deleteAssignation(dayOfWeek, i)">
                         <i class="fa-solid fa-xmark" title="Borrar asignación"></i>
                     </div>
